@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  
+  pablex_api:
+    image: pablex/pablex_api
+    container_name: pablex_api
+    restart: always
+    ports:
+      - "8082:8082"
+    networks:
+      - pablex_network
+    healthcheck:
+      test: "curl --fail --silent localhost:8082/health/ | grep true || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+    depends_on:
+      - pablex_mysql
+
+  pablex_mysql:
+    image: mysql
+    container_name: pablex_mysql
+    restart: always
+    volumes:
+      - pablex_mysql_conf:/etc/mysql/conf.d
+      - pablex_mysql_data:/var/lib/mysql
+      - "./database/script.sql:/docker-entrypoint-initdb.d/script.sql"
+    networks:
+      - pablex_network
+    environment:
+      - MYSQL_ROOT_PASSWORD=<TODO>
+      - MYSQL_DATABASE=pablex_db  
+    healthcheck:
+      test: "/usr/bin/mysql --user=<TODO> --password=<TODO> --execute \"SHOW DATABASES;\""
+      interval: 20s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+networks:
+  pablex_network:
+    name: pablex_network
+
+volumes:
+  pablex_mysql_conf:
+    name: pablex_mysql_conf
+  pablex_mysql_data:
+    name: pablex_mysql_data

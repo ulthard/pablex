@@ -30,8 +30,11 @@ services:
     networks:
       - pablex_network
     environment:
-      - MYSQL_ROOT_PASSWORD=<TODO>
-      - MYSQL_DATABASE=pablex_db  
+      MYSQL_ROOT_PASSWORD: '<TODO>'
+      MYSQL_DATABASE: 'pablex_db'
+      MYSQL_USER: '<TODO>'
+      MYSQL_PASSWORD: '<TODO>'
+
     healthcheck:
       test: "/usr/bin/mysql --user=<TODO> --password=<TODO> --execute \"SHOW DATABASES;\""
       interval: 20s

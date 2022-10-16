@@ -22,6 +22,6 @@ RUN chmod 755 /app/mvnw
 
 RUN ./mvnw dependency:go-offline -B
 
-RUN ./mvnw package -DskipTests
+RUN ./mvnw package -P prod -DskipTests
 
 ENTRYPOINT ["java","-jar","target/pablex-0.0.1-SNAPSHOT.jar"]

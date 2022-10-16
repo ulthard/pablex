@@ -5,10 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.pablex.dao.ConsumerDAO;
 import com.example.pablex.models.Consumer;
-import com.example.pablex.utils.ConsumerMapper;
 
 import java.util.List;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Service
@@ -27,19 +25,15 @@ public class ConsumerService {
     }
 
     public Consumer findById(int consumerID) throws SQLException {
-        ResultSet resultSet = this.consumerDAO.findById(consumerID);
-        resultSet.next();
-        return ConsumerMapper.resultSetToConsummer(resultSet);
+        return this.consumerDAO.findById(consumerID);
     }
 
     public Consumer findByKey(String clientKey) throws SQLException {
-        ResultSet resultSet = this.consumerDAO.findByKey(clientKey);
-        resultSet.next();
-        return ConsumerMapper.resultSetToConsummer(resultSet);
+        return this.consumerDAO.findByKey(clientKey);
     }
 
     public List<Consumer> findAll() throws SQLException {
-        return ConsumerMapper.resultSetToListConsummer(this.consumerDAO.findAll());
+        return this.consumerDAO.findAll();
     }
 
     public boolean update(Consumer consumer) throws SQLException {

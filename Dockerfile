@@ -2,6 +2,11 @@ FROM openjdk:8-jdk-alpine
 EXPOSE 8082
 WORKDIR /app
 
+ARG DATABASE_HOST
+ARG DATABASE_DB
+ARG DATABASE_USER
+ARG DATABASE_PASSWORD
+
 # Copy maven executable to the image
 COPY mvnw .
 COPY .mvn .mvn

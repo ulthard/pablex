@@ -16,6 +16,11 @@ services:
       timeout: 5s
       retries: 10
       start_period: 40s
+    environment:
+      DATABASE_HOST: "pablex_mysql"
+      DATABASE_DB: "pablex_db"
+      DATABASE_USER: "TODO_USER"
+      DATABASE_PASSWORD: "TODO_USER"
     depends_on:
       pablex_mysql:
         condition: service_healthy
@@ -31,12 +36,12 @@ services:
     networks:
       - pablex_network
     environment:
-      MYSQL_ROOT_PASSWORD: '<TODO_ROOT>'
+      MYSQL_ROOT_PASSWORD: 'TODO_ROOT'
       MYSQL_DATABASE: 'pablex_db'
-      MYSQL_USER: '<TODO_USER>'
-      MYSQL_PASSWORD: '<TODO_USER>'
+      MYSQL_USER: 'TODO_USER'
+      MYSQL_PASSWORD: 'TODO_USER'
     healthcheck:
-      test: "/usr/bin/mysql --user=<TODO_USER> --password=<TODO_USER> --execute \"SHOW DATABASES;\""
+      test: "/usr/bin/mysql --user=TODO_USER --password=TODO_USER --execute \"SHOW DATABASES;\""
       interval: 20s
       timeout: 5s
       retries: 10

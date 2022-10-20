@@ -74,7 +74,7 @@ public class ConsumerDAO {
 
     public List<Consumer> findAll() throws SQLException {
         try (Connection connection = dataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CONSUMERS")) {
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CONSUMERS ORDER BY CONSUMERS_FIRSTNAME ASC")) {
                 return ConsumerMapper.resultSetToListConsummer(preparedStatement.executeQuery());
         } catch (SQLException e) {
             throw e;
